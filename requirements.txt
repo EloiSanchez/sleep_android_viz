@@ -1,0 +1,2 @@
+dbt-sqlite==1.4.0
+pandas==2.0.2
