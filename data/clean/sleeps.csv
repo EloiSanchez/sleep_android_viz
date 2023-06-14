@@ -1,4 +1,4 @@
-Id,Tz,From,To,Sched,Hours,Rating,Comment,Framerate,Snore,Noise,Cycles,DeepSleep,LenAdjust,Geo
+id,tz,sleep_from,sleep_to,sched,hours,rating,comment,framerate,snore,noise,cycles,deepsleep,lenadjust,geo
 1686529463485,Europe/Amsterdam,2023-06-12 02:24:00,2023-06-12 07:51:00,2023-06-12 07:40:00,5.45,0.0, #watch  #geo1,10008,60,0.04146851,4,0.54,-24,e08d6816
 1686440836740,Europe/Amsterdam,2023-06-11 01:47:00,2023-06-11 09:54:00,2023-06-11 10:40:00,8.12,0.0, #watch  #geo1,10008,2430,0.07314475,7,0.3469388,-62,e08d6816
 1686358567581,Europe/Amsterdam,2023-06-10 02:56:00,2023-06-10 09:47:00,2023-06-10 10:40:00,6.86,0.0, #watch  #geo1,10008,90,0.025122004,6,0.4871795,0,e08d6816
