@@ -13,6 +13,11 @@ sleep_android_viz:
         staging: 'database/staging.db'
         intermediate: 'database/intermediate.db'
 
-      schema_directory: '/database/'
+      schema_directory: 'database/'
+
+    extensions:
+        - "libs/crypto.so"
+        - "libs/math.so"
+        - "libs/text.so"
 
   target: dev
