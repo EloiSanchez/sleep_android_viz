@@ -2,5 +2,7 @@
 target/
 dbt_packages/
 logs/
+analyses/sandbox.sql
 
 .user.yml
+.vscode

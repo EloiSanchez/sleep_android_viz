@@ -1,0 +1,24 @@
+version: 2
+
+models:
+  - name: stg_movements
+    description: "Contains information about the movement of the user during sleep"
+    tests:
+      - dbt_expectations.expect_compound_columns_to_be_unique:
+          column_list: ["id", "time"]
+
+    columns:
+      - name: id
+        description: "Unique identifier of each sleep period"
+        tests:
+          - not_null
+
+      - name: time
+        description: "Time indicating the 5 minute period containing the aggregated accelerometric data"
+        tests:
+          - not_null
+
+      - name: value
+        description: "Accelerometric data aggregated for the time period. Higher means more movement, -0.01 means stopped recording due to low battery."
+        tests:
+          - not_null
