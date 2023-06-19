@@ -1,0 +1,103 @@
+version: 2
+
+models:
+  - name: fnl_sleep__obt
+    description: "Contains all numeric information about sleep records without much processing."
+
+    columns:
+      - name: id
+        description: "Unique identifier of each sleep period"
+        tests:
+          - not_null
+          - unique
+
+      - name: year
+        description: "Year when the sleep was recorded"
+        tests:
+          - not_null
+
+      - name: month
+        description: "Numeric value of month when the sleep was recorded (01-12)"
+        tests:
+          - not_null
+
+      - name: week
+        description: "Numeric value of the week of the year when the sleep was recorded (00-53)"
+        tests:
+          - not_null
+
+      - name: day_of_week
+        description: "Numeric value of the day of the week when the sleep was recorded (0-6 with Sunday==0)"
+        tests:
+          - not_null
+
+      - name: day_of_month
+        description: "Day of the month when the sleep was recorded (00-)"
+        tests:
+          - not_null
+
+      - name: day_of_year
+        description: "Day of the year when the sleep was recorded (01-366)"
+        tests:
+          - not_null
+
+      - name: sleep_from
+        description: "Numeric value indicating the hour the app started recording a sleep"
+        tests:
+          - not_null
+
+      - name: sleep_to
+        description: "Numeric value indicating the hour the app stopped recording a sleep"
+        tests:
+          - not_null
+
+      - name: sched
+        description: "Numeric value indicating the hour the alarm was scheduled to go off a sleep"
+        tests:
+          - not_null
+
+      - name: hours
+        description: "Total time in hours of recorded sleep"
+        tests:
+          - not_null
+
+      - name: lenadjust
+        description: "Adjust record length in case of awake periods"
+        tests:
+          - not_null
+
+      - name: corrected_hours
+        description: "Total time in hours of recorded sleep corrected by lenadjust"
+        tests:
+          - not_null
+
+      - name: rating
+        description: "Rating given by the user to the sleep period. Defaults to 0 if no rating was given"
+        tests:
+          - not_null
+
+      - name: snore
+        description: "Snoring value. -1 if detection is turned off, 0 if no snoring detected"
+        tests:
+          - not_null
+
+      - name: noise
+        description: "Average noise value during the night"
+        tests:
+          - not_null
+
+      - name: cycles
+        description: "Sleep cycles measure. -1 if the sleep record was manually inserted"
+        tests:
+          - not_null
+
+      - name: deepsleep
+        description: "Aggregated value of deep sleep. If -1 or -2 then no hypnogram was generated"
+        tests:
+          - not_null
+
+
+      - name: geo
+        description: "Hashed value of the geo location"
+        tests:
+          - not_null
