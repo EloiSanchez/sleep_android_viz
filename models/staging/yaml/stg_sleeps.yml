@@ -1,0 +1,77 @@
+version: 2
+
+models:
+  - name: stg_sleeps
+    description: "Sleeps recorded by the Sleep as Android app."
+
+    columns:
+      - name: id
+        description: "Unique identifier of each sleep period"
+        tests:
+          - not_null
+          - unique
+
+      - name: tz
+        description: "Timezone where the sleep was recorded"
+        tests:
+          - not_null
+
+      - name: sleep_from
+        description: "Timestamp indicating when the app started recording a sleep"
+        tests:
+          - not_null
+
+      - name: sleep_to
+        description: "Timestamp indicating when the sleep stopped recording"
+        tests:
+          - not_null
+
+      - name: sched
+        description: "Timestamp indicating when the alarm was scheduled to go off"
+        tests:
+          - not_null
+
+      - name: hours
+        description: "Total time in hours of recorded sleep"
+        tests:
+          - not_null
+
+      - name: rating
+        description: "Rating given by the user to the sleep period. Defaults to 0 if no rating was given"
+        tests:
+          - not_null
+
+      - name: comment
+        description: "Comment and tags given by the user. Defaults to automatic tags. Tags are preceded by #"
+        tests:
+          - not_null
+
+      - name: snore
+        description: "Snoring value. -1 if detection is turned off, 0 if no snoring detected"
+        tests:
+          - not_null
+
+      - name: noise
+        description: "Average noise value during the night"
+        tests:
+          - not_null
+
+      - name: cycles
+        description: "Sleep cycles measure. -1 if the sleep record was manually inserted"
+        tests:
+          - not_null
+
+      - name: deepsleep
+        description: "Aggregated value of deep sleep. If -1 or -2 then no hypnogram was generated"
+        tests:
+          - not_null
+
+      - name: lenadjust
+        description: "Adjust record length in case of awake periods"
+        tests:
+          - not_null
+
+      - name: geo
+        description: "Hashed value of the geo location"
+        tests:
+          - not_null

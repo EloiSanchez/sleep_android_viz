@@ -1,0 +1,12 @@
+version: 2
+
+models:
+  - name: stg_events
+    description: "List of events for every sleep period with timestamp"
+
+    columns:
+      - name: id
+        description: "Unique identifier of each sleep period"
+
+      - name: event
+        description: "Events and timestamps. See event description https://docs.sleep.urbandroid.org/devs/sleepcloud_api.html#event-labels"

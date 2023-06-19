@@ -33,3 +33,9 @@ clean-targets:         # directories to be removed by `dbt clean`
 models:
   sleep_android_viz:
     +materialized: table
+
+    staging:
+      +schema: staging
+
+    intermediate:
+      +schema: intermediate
