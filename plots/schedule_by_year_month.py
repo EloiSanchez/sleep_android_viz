@@ -32,7 +32,8 @@ def make_plot():
         height=600,
         width=900,
         template="simple_white",
-        # TODO: Make Date appear first and wake up time second on hover menu
+        labels={"Wake up time": "Sleep schedule", "Date": "Month"},
+        # TODO: Make `month` appear first and `wake up time` second on hover menu
         hover_data={
             "Date": True,
             "Wake up time": ":.2f",
