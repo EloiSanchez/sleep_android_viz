@@ -1,4 +1,4 @@
-from utils import get_data, get_season, save_plot
+from utils import get_data, get_season, save_plot, SEASON_COLORS
 from plotly import express as px
 
 
@@ -24,15 +24,14 @@ def make_plot():
             "value": "Duration in hours",
             "month": "Month",
         },
-        color_discrete_map={  # replaces default color mapping by value
-            "Winter": "lightseagreen",
-            "Spring": "yellowgreen",
-            "Summer": "gold",
-            "Autumn": "coral",
-        },
+        color_discrete_map=SEASON_COLORS,
         template="simple_white",
     )
     fig.add_hline(avg, opacity=1, line_width=1.5, line_dash="dash", line_color="gray")
+
+    # show grid
+    fig.update_xaxes(showgrid=True)
+    fig.update_yaxes(showgrid=True)
 
     save_plot(fig, "duration_by_month")
 

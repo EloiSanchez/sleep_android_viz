@@ -1,0 +1,92 @@
+from utils import SEASON_COLORS, get_data, get_season, save_plot
+from plotly import express as px
+import pandas as pd
+
+
+def make_plot():
+    # get data
+    df = get_data(
+        "fnl_sleep__obt", ("year", "month", "sleep_from", "hours", "sched")
+    ).rename(columns={"sleep_from": "Bed time", "hours": "Duration"})
+
+    # group and clean data
+    df = df.groupby(["year", "month"]).mean().reset_index()
+    df["Date"] = df["year"] + "-" + df["month"]
+    df["Season"] = get_season(df["month"])
+    df["Sleep Duration"] = df["Duration"]
+
+    bed_time = df["Bed time"].mean()
+    wake_up_time = (df["Bed time"] + df["Duration"]).mean()
+
+    # In the plot, duration will become wake up time
+    df = df.rename(columns={"Duration": "Wake up time"})
+
+    # make plot
+    fig = px.bar(
+        df,
+        x="Date",
+        y="Wake up time",
+        base="Bed time",
+        color="Season",
+        color_discrete_map=SEASON_COLORS,
+        height=600,
+        width=900,
+        template="simple_white",
+        # TODO: Make Date appear first and wake up time second on hover menu
+        hover_data={
+            "Date": True,
+            "Wake up time": ":.2f",
+            "Bed time": ":.2f",
+            "Sleep Duration": ":.2f",
+            "Season": False,
+        },
+    )
+
+    # add horizontal average lines and labels
+    fig.add_hline(
+        bed_time, opacity=1, line_width=1.5, line_dash="dash", line_color="gray"
+    )
+    fig.add_hline(
+        wake_up_time, opacity=1, line_width=1.5, line_dash="dash", line_color="gray"
+    )
+
+    for label, var in {"Bed time": bed_time, "Wake up time": wake_up_time}.items():
+        fig.add_annotation(
+            x=df["Date"].min(),
+            y=var,
+            text=f"Average {label.lower()}",
+            showarrow=False,
+            yshift=12,
+            xshift=5,
+            bgcolor="#ffffff",
+            opacity=0.8,
+            font=dict(color="gray"),
+            xanchor="left",
+        )
+
+    # make yaxis ticks pretty
+    fig.update_layout(
+        yaxis=dict(
+            tickmode="array",
+            tickvals=list(range(24)),
+            ticktext=[f"{x}:00" for x in range(24)],
+        ),
+    )
+
+    # show grid
+    fig.update_xaxes(showgrid=True)
+    fig.update_yaxes(showgrid=True)
+
+    save_plot(fig, "schedule_by_year_month")
+
+    return fig
+
+
+def main():
+    fig = make_plot()
+
+    fig.show()
+
+
+if __name__ == "__main__":
+    main()

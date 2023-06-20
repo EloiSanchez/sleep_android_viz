@@ -21,6 +21,13 @@ SEASONS = {
     "12": "Autumn",
 }
 
+SEASON_COLORS = {
+    "Winter": "lightseagreen",
+    "Spring": "yellowgreen",
+    "Summer": "gold",
+    "Autumn": "coral",
+}
+
 FILE_PATH = os.path.realpath(__file__)
 FILE_DIR = os.path.dirname(FILE_PATH)
 DB_DIR = os.path.os.path.join(FILE_PATH, "../../database/")

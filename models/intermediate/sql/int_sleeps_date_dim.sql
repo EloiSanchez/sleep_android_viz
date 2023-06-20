@@ -17,9 +17,11 @@ with
             strftime('%j', sleep_to, '-1 days') as day_of_year,
             {%- for time_col in time_cols %}
                 case
-                    when cast(strftime('%H', {{ time_col }}) as real) < 12
+                    {# when cast(strftime('%H', {{ time_col }}) as real) < 12 #}
+                    when cast(strftime('%H', {{ time_col }}) as real) > 18
                     then
-                        cast(strftime('%H', {{ time_col }}) + 24 as real)
+                        {# cast(strftime('%H', {{ time_col }}) + 24 as real) #}
+                        cast(strftime('%H', {{ time_col }}) - 24 as real)
                         + cast(strftime('%M', {{ time_col }}) as real) / 60
                     else
                         cast(strftime('%H', {{ time_col }}) as real)
