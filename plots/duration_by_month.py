@@ -1,4 +1,11 @@
-from utils import get_data, get_season, save_plot, SEASON_COLORS
+from utils import (
+    get_data,
+    get_season,
+    save_plot,
+    default_style,
+    add_hline,
+    SEASON_COLORS,
+)
 from plotly import express as px
 from plotly.graph_objects import Figure
 
@@ -19,20 +26,15 @@ def make_plot(testing: bool = False) -> Figure:
         y=["corrected_hours"],
         color="Season",
         title="Sleep duration by month",
-        width=900,
-        height=600,
         labels={  # replaces default labels by column name
             "value": "Duration in hours",
             "month": "Month",
         },
         color_discrete_map=SEASON_COLORS,
-        template="simple_white",
     )
-    fig.add_hline(avg, opacity=1, line_width=1.5, line_dash="dash", line_color="gray")
 
-    # show grid
-    fig.update_xaxes(showgrid=True)
-    fig.update_yaxes(showgrid=True)
+    add_hline(fig, avg)
+    default_style(fig)
 
     save_plot(fig, "duration_by_month", testing)
 

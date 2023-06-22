@@ -1,4 +1,11 @@
-from utils import SEASON_COLORS, get_data, get_season, save_plot
+from utils import (
+    SEASON_COLORS,
+    get_data,
+    get_season,
+    default_style,
+    save_plot,
+    add_hline,
+)
 from plotly import express as px
 from plotly.graph_objects import Figure
 
@@ -29,9 +36,6 @@ def make_plot(testing: bool = False) -> Figure:
         base="Bed time",
         color="Season",
         color_discrete_map=SEASON_COLORS,
-        height=600,
-        width=900,
-        template="simple_white",
         labels={"Wake up time": "Sleep schedule", "Date": "Month"},
         # TODO: Make `month` appear first and `wake up time` second on hover menu
         hover_data={
@@ -43,13 +47,11 @@ def make_plot(testing: bool = False) -> Figure:
         },
     )
 
+    default_style(fig)
+
     # add horizontal average lines and labels
-    fig.add_hline(
-        bed_time, opacity=1, line_width=1.5, line_dash="dash", line_color="gray"
-    )
-    fig.add_hline(
-        wake_up_time, opacity=1, line_width=1.5, line_dash="dash", line_color="gray"
-    )
+    add_hline(fig, bed_time)
+    add_hline(fig, wake_up_time)
 
     for label, var in {"Bed time": bed_time, "Wake up time": wake_up_time}.items():
         fig.add_annotation(

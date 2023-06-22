@@ -22,10 +22,10 @@ SEASONS = {
 }
 
 SEASON_COLORS = {
-    "Winter": "lightseagreen",
-    "Spring": "yellowgreen",
-    "Summer": "gold",
-    "Autumn": "coral",
+    "Winter": "#4BCEDD",
+    "Spring": "#6FB668",
+    "Summer": "#F2C14E",
+    "Autumn": "#F77F50",
 }
 
 FILE_PATH = os.path.realpath(__file__)
@@ -53,6 +53,18 @@ def get_data(
 
 def get_season(month: pd.Series) -> pd.Series:
     return pd.Series(map(lambda x: SEASONS[x], month), name="Season")
+
+
+def default_style(fig: Figure) -> Figure:
+    fig.update_layout(width=900, height=600, template="simple_white")
+    fig.update_xaxes(showgrid=True)
+    fig.update_yaxes(showgrid=True)
+
+    return fig
+
+
+def add_hline(fig: Figure, y: float) -> None:
+    fig.add_hline(y, opacity=1, line_width=1.5, line_dash="dash", line_color="gray")
 
 
 def save_plot(fig: Figure, name: str, testing: bool = False) -> None:
