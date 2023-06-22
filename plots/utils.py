@@ -34,7 +34,7 @@ DB_DIR = os.path.os.path.join(FILE_PATH, "../../database/")
 
 
 def get_data(
-    table_name: str, columns: Union[None, Iterable[str]] = "*"
+    table_name: str, columns: Union[None, Iterable[str]] = "*", testing: bool = False
 ) -> pd.DataFrame:
     # Get the database directory independent of the path where the script executes
 
@@ -45,6 +45,9 @@ def get_data(
 
     query = f"""select {columns} from {table_name}"""
 
+    if testing:
+        query += "\nlimit 100"
+
     return pd.read_sql(query, con)
 
 
@@ -52,8 +55,11 @@ def get_season(month: pd.Series) -> pd.Series:
     return pd.Series(map(lambda x: SEASONS[x], month), name="Season")
 
 
-def save_plot(fig: Figure, name: str) -> None:
-    fig.write_image(
-        os.path.join(FILE_DIR, f"figures/png/{name}.png"),
-    )
-    fig.write_html(os.path.join(FILE_DIR, f"figures/html/{name}.html"), full_html=False)
+def save_plot(fig: Figure, name: str, testing: bool = False) -> None:
+    if testing is False:
+        fig.write_image(
+            os.path.join(FILE_DIR, f"figures/png/{name}.png"),
+        )
+        fig.write_html(
+            os.path.join(FILE_DIR, f"figures/html/{name}.html"), full_html=False
+        )

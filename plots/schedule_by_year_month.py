@@ -1,12 +1,12 @@
 from utils import SEASON_COLORS, get_data, get_season, save_plot
 from plotly import express as px
-import pandas as pd
+from plotly.graph_objects import Figure
 
 
-def make_plot():
+def make_plot(testing: bool = False) -> Figure:
     # get data
     df = get_data(
-        "fnl_sleep__obt", ("year", "month", "sleep_from", "hours", "sched")
+        "fnl_sleep__obt", ("year", "month", "sleep_from", "hours", "sched"), testing
     ).rename(columns={"sleep_from": "Bed time", "hours": "Duration"})
 
     # group and clean data
@@ -78,7 +78,7 @@ def make_plot():
     fig.update_xaxes(showgrid=True)
     fig.update_yaxes(showgrid=True)
 
-    save_plot(fig, "schedule_by_year_month")
+    save_plot(fig, "schedule_by_year_month", testing)
 
     return fig
 

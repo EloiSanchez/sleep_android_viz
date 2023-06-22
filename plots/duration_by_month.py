@@ -1,10 +1,11 @@
 from utils import get_data, get_season, save_plot, SEASON_COLORS
 from plotly import express as px
+from plotly.graph_objects import Figure
 
 
-def make_plot():
+def make_plot(testing: bool = False) -> Figure:
     # get data
-    df = get_data("fnl_sleep__obt", ("month", "corrected_hours"))
+    df = get_data("fnl_sleep__obt", ("month", "corrected_hours"), testing)
 
     # group and clean data
     df = df.groupby(by=["month"]).mean().reset_index()
@@ -33,7 +34,7 @@ def make_plot():
     fig.update_xaxes(showgrid=True)
     fig.update_yaxes(showgrid=True)
 
-    save_plot(fig, "duration_by_month")
+    save_plot(fig, "duration_by_month", testing)
 
     return fig
 
