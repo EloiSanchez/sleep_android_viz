@@ -39,3 +39,9 @@ models:
 
     intermediate:
       +schema: intermediate
+
+    final:
+      +schema: main
+
+seeds:
+  +schema: seeds

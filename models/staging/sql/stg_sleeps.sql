@@ -11,13 +11,13 @@ with
             sleep_to,
             sched,
             hours,
-            rating,
+            cast(rating as real) rating,
             comment,
             snore,
             noise,
             cycles,
             deepsleep,
-            lenadjust,
+            cast(lenadjust as real) lenadjust,
             geo
 
         from sleeps

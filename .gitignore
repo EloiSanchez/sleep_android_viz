@@ -6,3 +6,5 @@ analyses/sandbox.sql
 
 .user.yml
 .vscode
+
+__pycache__

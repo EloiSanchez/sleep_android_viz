@@ -5,7 +5,7 @@ import os
 file_path = os.path.realpath(__file__)
 db_dir = os.path.os.path.join(file_path, "../../../database/")
 
-SCHEMAS = ("staging", "intermediate", "final")
+SCHEMAS = ("seeds", "staging", "intermediate", "final")
 
 for schema in SCHEMAS:
     con = sqlite3.connect(os.path.join(db_dir, schema + ".db"))

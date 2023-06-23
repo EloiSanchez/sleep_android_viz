@@ -10,6 +10,8 @@ sleep_android_viz:
       schemas_and_paths:
         main: 'database/final.db'
         raw: 'database/raw.db'
+        staging: 'database/staging.db'
+        seeds: 'database/seeds.db'
 
       schema_directory: 'database/'
 
