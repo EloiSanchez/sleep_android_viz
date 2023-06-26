@@ -84,8 +84,7 @@ def make_plot(
         ),
     )
 
-    if testing is not True:
-        save_plot(fig, f"schedule_by_{label.lower()}", testing)
+    save_plot(fig, f"schedule_by_{label.lower()}", testing)
 
     return fig
 

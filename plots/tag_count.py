@@ -1,10 +1,7 @@
 from utils import (
     get_data,
-    get_season,
     save_plot,
     default_style,
-    add_hline,
-    SEASON_COLORS,
 )
 from plotly import express as px
 from plotly.graph_objects import Figure
