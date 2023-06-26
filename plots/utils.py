@@ -73,5 +73,5 @@ def save_plot(fig: Figure, name: str, testing: bool = False) -> None:
             os.path.join(FILE_DIR, f"figures/png/{name}.png"),
         )
         fig.write_html(
-            os.path.join(FILE_DIR, f"figures/html/{name}.html"), full_html=False
+            os.path.join(FILE_DIR, f"figures/html/{name}.html"), full_html=True
         )
