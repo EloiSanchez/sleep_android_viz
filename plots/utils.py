@@ -63,6 +63,12 @@ def default_style(fig: Figure) -> Figure:
     return fig
 
 
+def to_hour(time: float) -> str:
+    hh = round(time)
+    mm = int((time - hh) * 60)
+    return f"{hh:d}:{mm:0>2d}"
+
+
 def add_hline(fig: Figure, y: float) -> None:
     fig.add_hline(y, opacity=1, line_width=1.5, line_dash="dash", line_color="gray")
 
@@ -73,5 +79,5 @@ def save_plot(fig: Figure, name: str, testing: bool = False) -> None:
             os.path.join(FILE_DIR, f"figures/png/{name}.png"),
         )
         fig.write_html(
-            os.path.join(FILE_DIR, f"figures/html/{name}.html"), full_html=False
+            os.path.join(FILE_DIR, f"figures/html/{name}.html"), full_html=True
         )

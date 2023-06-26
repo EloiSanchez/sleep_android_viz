@@ -1,25 +1,46 @@
 from utils import (
     SEASON_COLORS,
     get_data,
-    get_season,
     default_style,
     save_plot,
     add_hline,
+    to_hour,
 )
 from plotly import express as px
 from plotly.graph_objects import Figure
 
+from functools import reduce
 
-def make_plot(testing: bool = False) -> Figure:
+
+def make_plot(
+    time_granularity: str = "Month", time_group: bool = False, testing: bool = False
+) -> Figure:
     # get data
     df = get_data(
         "fnl_sleep__obt", ("year", "month", "sleep_from", "hours", "sched"), testing
-    ).rename(columns={"sleep_from": "Bed time", "hours": "Duration"})
+    ).rename(
+        columns={
+            "sleep_from": "Bed time",
+            "hours": "Duration",
+            "month": "Month",
+            "year": "Year",
+        }
+    )
+
+    # get colums to group with
+    if time_granularity == "Month":
+        if time_group is False:
+            group_cols = ["Year", "Month"]
+            label = "Date"
+        else:
+            group_cols = label = "Month"
+    else:
+        group_cols = label = "Year"
 
     # group and clean data
-    df = df.groupby(["year", "month"]).mean().reset_index()
-    df["Date"] = df["year"] + "-" + df["month"]
-    df["Season"] = get_season(df["month"])
+    df = df.groupby(group_cols).mean().reset_index()
+    if label == "Date":
+        df[label] = reduce(lambda a, b: df[a] + "-" + df[b], group_cols)
     df["Sleep Duration"] = df["Duration"]
 
     bed_time = df["Bed time"].mean()
@@ -31,19 +52,19 @@ def make_plot(testing: bool = False) -> Figure:
     # make plot
     fig = px.bar(
         df,
-        x="Date",
+        x=label,
         y="Wake up time",
         base="Bed time",
-        color="Season",
+        color="Sleep Duration",
         color_discrete_map=SEASON_COLORS,
+        color_continuous_scale=px.colors.sequential.Aggrnyl_r,
         labels={"Wake up time": "Sleep schedule", "Date": "Month"},
-        # TODO: Make `month` appear first and `wake up time` second on hover menu
+        # TODO: Make `Month` appear first and `wake up time` second on hover menu
         hover_data={
-            "Date": True,
+            label: True,
             "Wake up time": ":.2f",
             "Bed time": ":.2f",
             "Sleep Duration": ":.2f",
-            "Season": False,
         },
     )
 
@@ -53,40 +74,24 @@ def make_plot(testing: bool = False) -> Figure:
     add_hline(fig, bed_time)
     add_hline(fig, wake_up_time)
 
-    for label, var in {"Bed time": bed_time, "Wake up time": wake_up_time}.items():
-        fig.add_annotation(
-            x=df["Date"].min(),
-            y=var,
-            text=f"Average {label.lower()}",
-            showarrow=False,
-            yshift=12,
-            xshift=5,
-            bgcolor="#ffffff",
-            opacity=0.8,
-            font=dict(color="gray"),
-            xanchor="left",
-        )
-
     # make yaxis ticks pretty
+    ticks = list(range(24)) + [bed_time, wake_up_time]
     fig.update_layout(
         yaxis=dict(
             tickmode="array",
-            tickvals=list(range(24)),
-            ticktext=[f"{x}:00" for x in range(24)],
+            tickvals=ticks,
+            ticktext=[f"{to_hour(x)}" for x in ticks],
         ),
     )
 
-    # show grid
-    fig.update_xaxes(showgrid=True)
-    fig.update_yaxes(showgrid=True)
-
-    save_plot(fig, "schedule_by_year_month", testing)
+    if testing is not True:
+        save_plot(fig, f"schedule_by_{label.lower()}", testing)
 
     return fig
 
 
 def main():
-    fig = make_plot()
+    fig = make_plot(time_granularity="Month", time_group=False)
 
     fig.show()
 
