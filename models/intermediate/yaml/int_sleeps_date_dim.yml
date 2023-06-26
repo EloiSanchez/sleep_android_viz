@@ -75,11 +75,6 @@ models:
         tests:
           - not_null
 
-      - name: comment
-        description: "Comment and tags given by the user. Defaults to automatic tags. Tags are preceded by #"
-        tests:
-          - not_null
-
       - name: snore
         description: "Snoring value. -1 if detection is turned off, 0 if no snoring detected"
         tests:

@@ -18,7 +18,8 @@ with
             cycles,
             deepsleep,
             cast(lenadjust as real) lenadjust,
-            geo
+            geo,
+            tags
 
         from sleeps
 
