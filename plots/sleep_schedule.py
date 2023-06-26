@@ -1,7 +1,6 @@
 from utils import (
     SEASON_COLORS,
     get_data,
-    get_season,
     default_style,
     save_plot,
     add_hline,
@@ -85,7 +84,8 @@ def make_plot(
         ),
     )
 
-    save_plot(fig, f"schedule_by_{label.lower()}", testing)
+    if testing is not True:
+        save_plot(fig, f"schedule_by_{label.lower()}", testing)
 
     return fig
 
