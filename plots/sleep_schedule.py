@@ -13,7 +13,10 @@ from functools import reduce
 
 
 def make_plot(
-    time_granularity: str = "Month", time_group: bool = False, testing: bool = False
+    time_granularity: str = "Month",
+    time_group: bool = False,
+    dashboard: bool = False,
+    testing: bool = False,
 ) -> Figure:
     # get data
     df = get_data(
@@ -68,11 +71,11 @@ def make_plot(
         },
     )
 
-    default_style(fig)
+    default_style(fig, dashboard)
 
     # add horizontal average lines and labels
-    add_hline(fig, bed_time)
-    add_hline(fig, wake_up_time)
+    add_hline(fig, bed_time, dashboard)
+    add_hline(fig, wake_up_time, dashboard)
 
     # make yaxis ticks pretty
     ticks = list(range(24)) + [bed_time, wake_up_time]

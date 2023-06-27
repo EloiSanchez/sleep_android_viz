@@ -28,6 +28,8 @@ SEASON_COLORS = {
     "Autumn": "#F77F50",
 }
 
+DASH_STYLE = {"base_color": "#272b30", "line_color": "#5c6571", "text_color": "#aaaaaa"}
+
 FILE_PATH = os.path.realpath(__file__)
 FILE_DIR = os.path.dirname(FILE_PATH)
 DB_DIR = os.path.os.path.join(FILE_PATH, "../../database/")
@@ -55,10 +57,32 @@ def get_season(month: pd.Series) -> pd.Series:
     return pd.Series(map(lambda x: SEASONS[x], month), name="Season")
 
 
-def default_style(fig: Figure) -> Figure:
-    fig.update_layout(width=900, height=600, template="simple_white")
-    fig.update_xaxes(showgrid=True)
-    fig.update_yaxes(showgrid=True)
+def default_style(fig: Figure, dashboard: bool = False) -> Figure:
+    if dashboard is True:
+        fig.update_layout(
+            template="simple_white",
+            paper_bgcolor=DASH_STYLE["base_color"],
+            plot_bgcolor=DASH_STYLE["base_color"],
+            font=dict(color=DASH_STYLE["text_color"]),
+            margin=dict(b=0, l=0, r=0, t=0),
+        )
+        fig.update_xaxes(
+            gridcolor=DASH_STYLE["line_color"],
+            tickcolor=DASH_STYLE["base_color"],
+            linecolor=DASH_STYLE["base_color"],
+            showgrid=True,
+        )
+        fig.update_yaxes(
+            gridcolor=DASH_STYLE["line_color"],
+            tickcolor=DASH_STYLE["base_color"],
+            linecolor=DASH_STYLE["base_color"],
+            showgrid=True,
+        )
+        fig.update_traces(marker_line_color=DASH_STYLE["base_color"])
+    else:
+        fig.update_layout(width=900, height=500, template="simple_white")
+        fig.update_yaxes(showgrid=True)
+        fig.update_xaxes(showgrid=True)
 
     return fig
 
@@ -69,8 +93,14 @@ def to_hour(time: float) -> str:
     return f"{hh:d}:{mm:0>2d}"
 
 
-def add_hline(fig: Figure, y: float) -> None:
-    fig.add_hline(y, opacity=1, line_width=1.5, line_dash="dash", line_color="gray")
+def add_hline(fig: Figure, y: float, dashboard: bool = False) -> None:
+    fig.add_hline(
+        y,
+        opacity=1,
+        line_width=1.5,
+        line_dash="dash",
+        line_color="#D0D4D9" if dashboard is True else "gray",
+    )
 
 
 def save_plot(fig: Figure, name: str, testing: bool = False) -> None:
