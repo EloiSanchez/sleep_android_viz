@@ -32,7 +32,6 @@ with
             lenadjust,
             hours + (lenadjust / 60) as corrected_hours,
             rating,
-            comment,
             snore,
             noise,
             cycles,

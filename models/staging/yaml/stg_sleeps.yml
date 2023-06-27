@@ -71,6 +71,11 @@ models:
         tests:
           - not_null
 
+      - name: tags
+        desctiption: "Tags associated with that sleep (comma separated)"
+        tests:
+          - not_null
+
       - name: geo
         description: "Hashed value of the geo location"
         tests:

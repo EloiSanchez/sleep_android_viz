@@ -54,8 +54,7 @@ def make_plot(
     add_hline(fig, avg)
     default_style(fig)
 
-    if testing is not True:
-        save_plot(fig, f"duration_by_{label.lower()}", testing)
+    save_plot(fig, f"duration_by_{label.lower()}", testing)
 
     return fig
 
