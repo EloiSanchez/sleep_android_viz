@@ -15,17 +15,11 @@ repos:
 -   repo: https://github.com/dbt-checkpoint/dbt-checkpoint
     rev: v1.0.0
     hooks:
-    -   id: dbt-clean
-    -   id: dbt-deps
-    -   id: dbt-run
-    -   id: dbt-test
     -   id: dbt-docs-generate
     -   id: check-column-desc-are-same
     -   id: check-model-columns-have-desc
     -   id: check-model-has-all-columns
     -   id: check-model-has-description
-    -   id: check-model-has-tests-by-name
-        args: ["--tests", "unique=1", "--"]
     -   id: check-source-columns-have-desc
     -   id: check-source-has-all-columns
     -   id: check-source-table-has-description

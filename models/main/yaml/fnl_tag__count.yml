@@ -1,0 +1,25 @@
+version: 2
+
+models:
+- name: fnl_tag__count
+  description: "Count of tags in year-month time granularity"
+  tests:
+    - dbt_expectations.expect_compound_columns_to_be_unique:
+        column_list: ["year", "month", "tag"]
+  columns:
+  - name: year
+    description: "Year when the sleep was recorded"
+    tests:
+      - not_null
+  - name: month
+    description: "Numeric value of month when the sleep was recorded (01-12)"
+    tests:
+      - not_null
+  - name: tag
+    description: "Name of the tag assigned to a sleep"
+    tests:
+      - not_null
+  - name: count
+    description: "Number of times a tag appears on a month"
+    tests:
+      - not_null
