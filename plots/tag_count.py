@@ -8,7 +8,10 @@ from plotly.graph_objects import Figure
 
 
 def make_plot(
-    time_granularity: str = "Month", time_group: bool = False, testing: bool = False
+    time_granularity: str = "Month",
+    time_group: bool = False,
+    dashboard: bool = False,
+    testing: bool = False,
 ) -> Figure:
     # get data
     df = get_data("fnl_tag__count", testing=testing).rename(
@@ -27,9 +30,10 @@ def make_plot(
 
     fig = px.bar(df, x=label, y="Count", color="Tag")
 
-    default_style(fig)
+    default_style(fig, dashboard)
 
-    save_plot(fig, "tags", testing)
+    if dashboard is False:
+        save_plot(fig, "tags", testing)
 
     return fig
 

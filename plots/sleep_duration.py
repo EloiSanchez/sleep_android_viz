@@ -13,7 +13,10 @@ from functools import reduce
 
 
 def make_plot(
-    time_granularity: str = "Month", time_group: bool = False, testing: bool = False
+    time_granularity: str = "Month",
+    time_group: bool = False,
+    dashboard: bool = False,
+    testing: bool = False,
 ) -> Figure:
     # get data
     df = get_data(
@@ -46,15 +49,15 @@ def make_plot(
         x=label,
         y="Duration",
         color="Season" if time_granularity == "Month" else "Duration",
-        title="Sleep duration",
         color_continuous_scale=px.colors.sequential.Aggrnyl_r,
         color_discrete_map=SEASON_COLORS,
     )
 
-    add_hline(fig, avg)
-    default_style(fig)
+    add_hline(fig, avg, dashboard)
+    default_style(fig, dashboard)
 
-    save_plot(fig, f"duration_by_{label.lower()}", testing)
+    if dashboard is False:
+        save_plot(fig, f"duration_by_{label.lower()}", testing)
 
     return fig
 
