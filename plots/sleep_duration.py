@@ -20,9 +20,13 @@ def make_plot(
 ) -> Figure:
     # get data
     df = get_data(
-        "fnl_sleep__obt", ("year", "month", "corrected_hours"), testing
+        "fnl_sleep__obt", ("sleep_year", "sleep_month", "corrected_hours"), testing
     ).rename(
-        columns={"corrected_hours": "Duration", "month": "Month", "year": "Year"},
+        columns={
+            "corrected_hours": "Duration",
+            "sleep_month": "Month",
+            "sleep_year": "Year",
+        },
     )
 
     # get colums to group with

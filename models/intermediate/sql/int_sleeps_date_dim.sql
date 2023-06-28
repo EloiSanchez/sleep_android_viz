@@ -9,12 +9,16 @@ with
     int_sleeps_date_dim_sql as (
         select
             sleeps.id,
-            strftime('%Y', sleep_to, '-1 days') as year,
-            strftime('%m', sleep_to, '-1 days') as month,
-            strftime('%W', sleep_to, '-1 days') as week,
-            strftime('%w', sleep_to, '-1 days') as day_of_week,
-            strftime('%d', sleep_to, '-1 days') as day_of_month,
-            strftime('%j', sleep_to, '-1 days') as day_of_year,
+            strftime('%Y', sleep_to, '-1 days') as sleep_year,
+            strftime('%m', sleep_to, '-1 days') as sleep_month,
+            strftime('%d', sleep_to, '-1 days') as sleep_day_of_month,
+            strftime('%W', sleep_to, '-1 days') as sleep_week,
+            strftime('%w', sleep_to, '-1 days') as sleep_day_of_week,
+            strftime('%Y', sleep_to) as wake_year,
+            strftime('%m', sleep_to) as wake_month,
+            strftime('%d', sleep_to) as wake_day_of_month,
+            strftime('%W', sleep_to) as wake_week,
+            strftime('%w', sleep_to) as wake_day_of_week,
             {%- for time_col in time_cols %}
                 case
                     {# when cast(strftime('%H', {{ time_col }}) as real) < 12 #}

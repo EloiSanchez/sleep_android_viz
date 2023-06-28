@@ -7,11 +7,12 @@ with
 
     {# logical cte #}
     fnl_tag__count as (
-        select sleeps.year, sleeps.month, tags.tags as tag, count(*) as count
+        select
+            sleeps.sleep_year, sleeps.sleep_month, tags.tags as tag, count(*) as count
         from sleeps
         left join tags on sleeps.id = tags.id
         where tag <> " "
-        group by year, month, tag
+        group by sleep_year, sleep_month, tag
     )
 
 select *

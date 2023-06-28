@@ -20,13 +20,15 @@ def make_plot(
 ) -> Figure:
     # get data
     df = get_data(
-        "fnl_sleep__obt", ("year", "month", "sleep_from", "hours", "sched"), testing
+        "fnl_sleep__obt",
+        ("sleep_year", "sleep_month", "sleep_from", "hours", "sched"),
+        testing,
     ).rename(
         columns={
             "sleep_from": "Bed time",
             "hours": "Duration",
-            "month": "Month",
-            "year": "Year",
+            "sleep_month": "Month",
+            "sleep_year": "Year",
         }
     )
 
