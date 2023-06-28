@@ -1,0 +1,12 @@
+body {
+  /* color: #43586B; */
+  background-color: #2e3141;
+}
+
+.nav-pills {
+  border-radius: 5px;
+}
+
+.nav-pills .nav-link.active {
+  background-color: #3c4251;
+}

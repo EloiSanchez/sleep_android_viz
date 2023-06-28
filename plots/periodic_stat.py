@@ -9,7 +9,10 @@ from plotly.graph_objects import Figure
 
 
 def make_plot(
-    stat: str = "corrected_hours", period: str = "day", testing: bool = False
+    stat: str = "corrected_hours",
+    period: str = "day",
+    dashboard: bool = False,
+    testing: bool = False,
 ) -> Figure:
     # get data
     df = get_data(
@@ -37,7 +40,8 @@ def make_plot(
     add_hline(fig, avg)
     default_style(fig)
 
-    save_plot(fig, f"{period if period != 'day' else 'dai'}ly_{stat}", testing)
+    if dashboard is False:
+        save_plot(fig, f"{period if period != 'day' else 'dai'}ly_{stat}", testing)
 
     return fig
 

@@ -87,7 +87,8 @@ def make_plot(
         ),
     )
 
-    save_plot(fig, f"schedule_by_{label.lower()}", testing)
+    if dashboard is False:
+        save_plot(fig, f"schedule_by_{label.lower()}", testing)
 
     return fig
 

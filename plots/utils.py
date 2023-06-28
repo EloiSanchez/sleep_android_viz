@@ -28,7 +28,7 @@ SEASON_COLORS = {
     "Autumn": "#F77F50",
 }
 
-DASH_STYLE = {"base_color": "#272b30", "line_color": "#5c6571", "text_color": "#aaaaaa"}
+DASH_STYLE = {"base_color": "#2e3141", "line_color": "#5c6571", "text_color": "#aaaaaa"}
 
 FILE_PATH = os.path.realpath(__file__)
 FILE_DIR = os.path.dirname(FILE_PATH)

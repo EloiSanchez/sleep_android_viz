@@ -56,7 +56,8 @@ def make_plot(
     add_hline(fig, avg, dashboard)
     default_style(fig, dashboard)
 
-    save_plot(fig, f"duration_by_{label.lower()}", testing)
+    if dashboard is False:
+        save_plot(fig, f"duration_by_{label.lower()}", testing)
 
     return fig
 

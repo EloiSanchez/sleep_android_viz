@@ -32,7 +32,8 @@ def make_plot(
 
     default_style(fig, dashboard)
 
-    save_plot(fig, "tags", testing)
+    if dashboard is False:
+        save_plot(fig, "tags", testing)
 
     return fig
 
