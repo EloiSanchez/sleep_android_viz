@@ -1,0 +1,55 @@
+version: 2
+models:
+- name: fnl_sleep__weekly
+  description: "Aggregated weekly daya of sleep records"
+  columns:
+  - name: day_of_week
+    description: Numeric value of the day of the week (0-6 with Sunday==0)
+    tests:
+      - unique
+      - not_null
+  - name: short_name
+    description: Day of the week in short format
+    tests:
+      - not_null
+  - name: long_name
+    description: Day of the week in long format
+    tests:
+      - not_null
+  - name: sleep_to
+    description: "Numeric value indicating the hour the app stopped recording a sleep"
+    tests:
+      - not_null
+  - name: snooze
+    description: "Snooze duration (time passed from alarm until the user wakes up)"
+    tests:
+      - not_null
+  - name: alarm
+    description: "Numeric value indicating the hour the alarm was scheduled to go off a sleep"
+    tests:
+      - not_null
+  - name: sleep_from
+    description: "Numeric value indicating the hour the app started recording a sleep"
+    tests:
+      - not_null
+  - name: snore
+    description: "Snoring value. -1 if detection is turned off, 0 if no snoring detected"
+    tests:
+      - not_null
+  - name: deepsleep
+    description: "Aggregated value of deep sleep. If -1 or -2 then no hypnogram was generated"
+    tests:
+      - not_null
+  - name: cycles
+    description: "Sleep cycles measure"
+    tests:
+      - not_null
+  - name: hours
+    description: "Total time in hours of recorded sleep"
+    tests:
+      - not_null
+
+  - name: corrected_hours
+    description: "Total time in hours of recorded sleep corrected by lenadjust"
+    tests:
+      - not_null
