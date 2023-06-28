@@ -1,14 +1,12 @@
 import sqlite3
 import os
 
-# Get the database directory independent of the path where the script executes
-file_path = os.path.realpath(__file__)
-db_dir = os.path.os.path.join(file_path, "../../../database/")
+from python_utils import DB_DIR
 
 SCHEMAS = ("seeds", "staging", "intermediate", "final")
 
 for schema in SCHEMAS:
-    con = sqlite3.connect(os.path.join(db_dir, schema + ".db"))
+    con = sqlite3.connect(os.path.join(DB_DIR, schema + ".db"))
     cur = con.cursor()
 
     res = cur.execute(
