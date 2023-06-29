@@ -8,10 +8,30 @@ from plotly.graph_objects import Figure
 
 
 def make_plot(
-    to_plot: list = ["Bed time", "Wake up time", "Alarm time"],
+    active: list = [
+        "Bed time",
+        "Wake up time",
+        "Alarm time",
+        "Time in bed",
+        "Real sleep hours",
+    ],
     dashboard: bool = False,
     testing: bool = False,
 ) -> Figure:
+    column_names = {
+        "long_name": "Day",
+        "sleep_from": "Bed time",
+        "sleep_to": "Wake up time",
+        "hours": "Time in bed",
+        "corrected_hours": "Real sleep hours",
+        "alarm": "Alarm time",
+        "snooze": "Snooze",
+        "snore": "Snoring",
+        "deepsleep": "Deep Sleep (%)",
+        "cycles": "Cycles",
+    }
+    traces = list(column_names.values())
+
     # get data
     df = get_data(
         "fnl_sleep__weekly",
@@ -28,25 +48,12 @@ def make_plot(
             "corrected_hours",
         ),
         testing,
-    ).rename(
-        columns={
-            "long_name": "Day",
-            "sleep_from": "Bed time",
-            "sleep_to": "Wake up time",
-            "alarm": "Alarm time",
-            "snooze": "Snooze",
-            "snore": "Snoring",
-            "deepsleep": "Deep Sleep (%)",
-            "cycles": "Cycles",
-            "hours": "Time in bed",
-            "corrected_hours": "Real sleep hours",
-        }
-    )
+    ).rename(columns=column_names)
 
     fig = px.bar(
         df,
         x="Day",
-        y=to_plot,
+        y=traces,
         barmode="group",
         category_orders={
             "Day": [
@@ -62,6 +69,9 @@ def make_plot(
     )
 
     default_style(fig, dashboard)
+
+    for trace in set(traces).difference(set(active)):
+        fig.update_traces(selector={"name": trace}, visible="legendonly")
 
     if dashboard is False:
         save_plot(fig, "weekly_info", testing)

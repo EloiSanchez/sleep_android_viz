@@ -7,16 +7,14 @@ import sys
 sys.path.append(".")
 sys.path.append("./plots")
 
-from plots import sleep_schedule, sleep_duration, tag_count
+from plots import sleep_schedule, sleep_duration, tag_count, weekly_info
 
 
-GRAPH_STYLE = {
-    "height": "40vh",
-}
+GRAPH_STYLE = {"height": "35vh", "margin-bottom": "3vh"}
 
 
 COLUMN_STYLE = {
-    "width": "30%",
+    "width": "40%",
     "min-width": 400,
 }
 
@@ -46,19 +44,27 @@ def content():
                 [
                     html.H4("Sleep Schedule", style={"textAlign": "left"}),
                     dcc.Graph(figure={}, id="schedule-graph", style=GRAPH_STYLE),
+                    # html.Hr(),
+                    html.H4("Weekly summary"),
+                    dcc.Graph(
+                        figure=weekly_info.make_plot(dashboard=True), style=GRAPH_STYLE
+                    ),
                 ],
                 style=COLUMN_STYLE,
             ),
-            # Column Center
+            # # Column Center
+            # html.Div(
+            #     [
+            #         html.H4("Sleep Duration", style={"textAlign": "left"}),
+            #         dcc.Graph(figure={}, id="duration-graph", style=GRAPH_STYLE),
+            #     ],
+            #     style=COLUMN_STYLE,
+            # ),
+            # Column Right
             html.Div(
                 [
                     html.H4("Sleep Duration", style={"textAlign": "left"}),
                     dcc.Graph(figure={}, id="duration-graph", style=GRAPH_STYLE),
-                ],
-                style=COLUMN_STYLE,
-            ),
-            html.Div(
-                [
                     html.H4("Tags"),
                     dcc.Graph(figure={}, id="tags-graph", style=GRAPH_STYLE),
                 ],
@@ -104,6 +110,10 @@ def _update_duration(value):
 )
 def _update_tags(value):
     return tag_count.make_plot(**_temp_translator(value), dashboard=True)
+
+
+def _update_weekly():
+    return weekly_info.make_plot(dashboard=True)
 
 
 def _temp_translator(value):
