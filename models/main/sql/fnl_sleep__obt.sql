@@ -4,12 +4,11 @@ with
     sleeps as (
         select
             id,
-            year,
-            month,
-            week,
-            day_of_week,
-            day_of_month,
-            day_of_year,
+            sleep_year,
+            sleep_month,
+            sleep_week,
+            sleep_day_of_week,
+            sleep_day_of_month,
             sleep_from,
             sleep_to,
             sched,

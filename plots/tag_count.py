@@ -15,7 +15,12 @@ def make_plot(
 ) -> Figure:
     # get data
     df = get_data("fnl_tag__count", testing=testing).rename(
-        columns={"tag": "Tag", "count": "Count", "month": "Month", "year": "Year"},
+        columns={
+            "tag": "Tag",
+            "count": "Count",
+            "sleep_month": "Month",
+            "sleep_year": "Year",
+        },
     )
 
     if time_granularity == "Month" and time_group is False:

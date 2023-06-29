@@ -5,14 +5,14 @@ models:
   description: "Count of tags in year-month time granularity"
   tests:
     - dbt_expectations.expect_compound_columns_to_be_unique:
-        column_list: ["year", "month", "tag"]
+        column_list: ["sleep_year", "sleep_month", "tag"]
   columns:
-  - name: year
-    description: "Year when the sleep was recorded"
+  - name: sleep_year
+    description: "Year when the sleep was started"
     tests:
       - not_null
-  - name: month
-    description: "Numeric value of month when the sleep was recorded (01-12)"
+  - name: sleep_month
+    description: "Numeric value of month when the sleep was started (01-12)"
     tests:
       - not_null
   - name: tag

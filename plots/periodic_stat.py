@@ -16,7 +16,16 @@ def make_plot(
 ) -> Figure:
     # get data
     df = get_data(
-        "fnl_sleep__obt", ("year", "month", "week", "day_of_month", stat), testing
+        "fnl_sleep__obt",
+        ("sleep_year", "sleep_month", "sleep_week", "sleep_day_of_month", stat),
+        testing,
+    ).rename(
+        columns={
+            "sleep_year": "year",
+            "sleep_month": "month",
+            "sleep_week": "week",
+            "sleep_day_of_month": "day_of_month",
+        }
     )
 
     # group and clean data

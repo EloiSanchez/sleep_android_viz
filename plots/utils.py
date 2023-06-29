@@ -65,6 +65,8 @@ def default_style(fig: Figure, dashboard: bool = False) -> Figure:
             plot_bgcolor=DASH_STYLE["base_color"],
             font=dict(color=DASH_STYLE["text_color"]),
             margin=dict(b=0, l=0, r=0, t=0),
+            xaxis_title=None,
+            yaxis_title=None,
         )
         fig.update_xaxes(
             gridcolor=DASH_STYLE["line_color"],

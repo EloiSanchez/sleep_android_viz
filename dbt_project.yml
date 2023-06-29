@@ -44,4 +44,4 @@ models:
       +schema: main
 
 seeds:
-  +schema: seeds
+  +schema: main

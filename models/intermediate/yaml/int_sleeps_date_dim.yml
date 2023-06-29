@@ -10,33 +10,53 @@ models:
           - not_null
           - unique
 
-      - name: year
-        description: "Year when the sleep was recorded"
+      - name: sleep_year
+        description: "Year when the sleep was started"
         tests:
           - not_null
 
-      - name: month
-        description: "Numeric value of month when the sleep was recorded (01-12)"
+      - name: sleep_month
+        description: "Numeric value of month when the sleep was started (01-12)"
         tests:
           - not_null
 
-      - name: week
-        description: "Numeric value of the week of the year when the sleep was recorded (00-53)"
+      - name: sleep_week
+        description: "Numeric value of the week of the year when the sleep was started (00-53)"
         tests:
           - not_null
 
-      - name: day_of_week
-        description: "Numeric value of the day of the week when the sleep was recorded (0-6 with Sunday==0)"
+      - name: sleep_day_of_week
+        description: "Numeric value of the day of the week when the sleep was started (0-6 with Sunday==0)"
         tests:
           - not_null
 
-      - name: day_of_month
-        description: "Day of the month when the sleep was recorded (00-)"
+      - name: sleep_day_of_month
+        description: "Day of the month when the sleep was started (00-)"
         tests:
           - not_null
 
-      - name: day_of_year
-        description: "Day of the year when the sleep was recorded (01-366)"
+      - name: wake_year
+        description: "Year when the sleep was ended"
+        tests:
+          - not_null
+
+      - name: wake_month
+        description: "Numeric value of month when the sleep was ended (01-12)"
+        tests:
+          - not_null
+
+      - name: wake_week
+        description: "Numeric value of the week of the year when the sleep was ended (00-53)"
+        tests:
+          - not_null
+
+      - name: wake_day_of_week
+        description: "Numeric value of the day of the week when the sleep was ended (0-6 with Sunday==0)"
+        tests:
+          - not_null
+
+      - name: wake_day_of_month
+        description: "Day of the month when the sleep was ended (00-)"
         tests:
           - not_null
 
