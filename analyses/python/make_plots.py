@@ -18,4 +18,5 @@ for plot in [
     if (not os.path.isdir(os.path.join(PLOTS_DIR, x)) and x != "utils.py")
 ]:
     module = importlib.import_module(plot.split(".")[0])
+    print(f"Plotting from {module=}")
     module.make_plot()

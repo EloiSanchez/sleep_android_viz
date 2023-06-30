@@ -1,8 +1,4 @@
-from utils import (
-    get_data,
-    save_plot,
-    default_style,
-)
+from utils import get_data, save_plot, default_style, COLUMN_NAMES
 from plotly import express as px
 from plotly.graph_objects import Figure
 
@@ -18,20 +14,6 @@ def make_plot(
     dashboard: bool = False,
     testing: bool = False,
 ) -> Figure:
-    column_names = {
-        "long_name": "Day",
-        "sleep_from": "Bed time",
-        "sleep_to": "Wake up time",
-        "hours": "Time in bed",
-        "corrected_hours": "Real sleep hours",
-        "alarm": "Alarm time",
-        "snooze": "Snooze",
-        "snore": "Snoring",
-        "deepsleep": "Deep Sleep (%)",
-        "cycles": "Cycles",
-    }
-    traces = list(column_names.values())
-
     # get data
     df = get_data(
         "fnl_sleep__weekly",
@@ -40,20 +22,20 @@ def make_plot(
             "sleep_from",
             "sleep_to",
             "alarm",
+            "hours",
+            "corrected_hours",
             "snooze",
             "snore",
             "deepsleep",
             "cycles",
-            "hours",
-            "corrected_hours",
         ),
         testing,
-    ).rename(columns=column_names)
+    ).rename(columns=COLUMN_NAMES)
 
     fig = px.bar(
         df,
         x="Day",
-        y=traces,
+        y=df.columns,
         barmode="group",
         category_orders={
             "Day": [
@@ -70,7 +52,8 @@ def make_plot(
 
     default_style(fig, dashboard)
 
-    for trace in set(traces).difference(set(active)):
+    # Deactivate some variables by default
+    for trace in set(df.columns).difference(set(active)):
         fig.update_traces(selector={"name": trace}, visible="legendonly")
 
     if dashboard is False:

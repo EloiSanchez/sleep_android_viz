@@ -2,6 +2,7 @@ import pandas as pd
 import sqlite3
 import os
 from plotly.graph_objects import Figure
+import plotly.express as px
 
 from typing import Union, Iterable
 
@@ -28,11 +29,45 @@ SEASON_COLORS = {
     "Autumn": "#F77F50",
 }
 
-DASH_STYLE = {"base_color": "#2e3141", "line_color": "#5c6571", "text_color": "#aaaaaa"}
+DASH_STYLE = {
+    "base_color": "#2e3141",
+    "line_color": "#5c6571",
+    "text_color": "#aaaaaa",
+    "clear_background_color": "#3c4251",
+}
+
+DASH_REF_LINE_STYLE = {
+    "opacity": 1,
+    "line_width": 1.5,
+    "line_dash": "dash",
+    "line_color": "#d0d4d9",
+}
 
 FILE_PATH = os.path.realpath(__file__)
 FILE_DIR = os.path.dirname(FILE_PATH)
 DB_DIR = os.path.os.path.join(FILE_PATH, "../../database/")
+
+COLUMN_NAMES = {
+    "long_name": "Day",
+    "sleep_from": "Bed time",
+    "sleep_to": "Wake up time",
+    "hours": "Time in bed",
+    "corrected_hours": "Real sleep hours",
+    "alarm": "Alarm time",
+    "sched": "Alarm time",
+    "snooze": "Snooze time",
+    "rating": "Rating",
+    "snore": "Snoring",
+    "deepsleep": "Deep Sleep (%)",
+    "cycles": "Cycles",
+    "noise": "Noise",
+    "sleep_year": "Year",
+    "sleep_month": "Month",
+    "sleep_day_of_month": "Day",
+    "sleep_week": "Week",
+    "tag": "Tag",
+    "count": "Count",
+}
 
 
 def get_data(
@@ -80,12 +115,13 @@ def default_style(fig: Figure, dashboard: bool = False) -> Figure:
             linecolor=DASH_STYLE["base_color"],
             showgrid=True,
         )
-        fig.update_traces(marker_line_color=DASH_STYLE["base_color"])
+        fig.update_traces(
+            marker_line_color=DASH_STYLE["base_color"],
+        )
     else:
         fig.update_layout(width=900, height=500, template="simple_white")
         fig.update_yaxes(showgrid=True)
         fig.update_xaxes(showgrid=True)
-
     return fig
 
 
@@ -98,10 +134,10 @@ def to_hour(time: float) -> str:
 def add_hline(fig: Figure, y: float, dashboard: bool = False) -> None:
     fig.add_hline(
         y,
-        opacity=1,
-        line_width=1.5,
-        line_dash="dash",
-        line_color="#D0D4D9" if dashboard is True else "gray",
+        opacity=DASH_REF_LINE_STYLE["opacity"],
+        line_width=DASH_REF_LINE_STYLE["line_width"],
+        line_dash=DASH_REF_LINE_STYLE["line_dash"],
+        line_color=DASH_REF_LINE_STYLE["line_color"] if dashboard is True else "gray",
     )
 
 

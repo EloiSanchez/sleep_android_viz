@@ -1,8 +1,4 @@
-from utils import (
-    get_data,
-    save_plot,
-    default_style,
-)
+from utils import get_data, save_plot, default_style, COLUMN_NAMES
 from plotly import express as px
 from plotly.graph_objects import Figure
 
@@ -14,14 +10,7 @@ def make_plot(
     testing: bool = False,
 ) -> Figure:
     # get data
-    df = get_data("fnl_tag__count", testing=testing).rename(
-        columns={
-            "tag": "Tag",
-            "count": "Count",
-            "sleep_month": "Month",
-            "sleep_year": "Year",
-        },
-    )
+    df = get_data("fnl_tag__count", testing=testing).rename(columns=COLUMN_NAMES)
 
     if time_granularity == "Month" and time_group is False:
         label = "Date"

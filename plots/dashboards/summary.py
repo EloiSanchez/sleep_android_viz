@@ -7,7 +7,7 @@ import sys
 sys.path.append(".")
 sys.path.append("./plots")
 
-from plots import sleep_schedule, sleep_duration, tag_count, weekly_info
+from plots import sleep_schedule, sleep_duration, tag_count, weekly_info, scatter_plot
 
 
 GRAPH_STYLE = {"height": "35vh", "margin-bottom": "3vh"}
@@ -109,7 +109,7 @@ def _update_duration(value):
     Input(component_id="agg-value", component_property="value"),
 )
 def _update_tags(value):
-    return tag_count.make_plot(**_temp_translator(value), dashboard=True)
+    return scatter_plot.make_plot(dashboard=True)
 
 
 def _update_weekly():
