@@ -11,18 +11,16 @@ import summary
 
 app = Dash(
     __name__,
-    external_stylesheets=[dbc.themes.SUPERHERO, dbc.icons.BOOTSTRAP],
+    external_stylesheets=[dbc.themes.SUPERHERO, dbc.icons.FONT_AWESOME],
     suppress_callback_exceptions=True,
 )
 
 
 sidebar = sidebar.content()
 
-content = html.Div(id="page-content", style={"margin-left": "18rem"})
+content = html.Div(summary.content(), id="page-content", style={"margin-left": "18rem"})
 
-app.layout = html.Div(
-    [dcc.Location(id="url"), sidebar, content],
-)
+app.layout = html.Div([sidebar, content])
 
 
 @callback(Output("page-content", "children"), Input("url", "pathname"))

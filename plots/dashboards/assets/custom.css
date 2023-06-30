@@ -10,3 +10,17 @@ body {
 .nav-pills .nav-link.active {
   background-color: #3c4251;
 }
+
+.Select-control {
+  border-color: #353849;
+  background-color: #3c4251;
+}
+
+.Select-menu-outer {
+  border-color: #353849;
+  background-color: #3c4251;
+}
+
+a {
+  color: #75c872;
+}
