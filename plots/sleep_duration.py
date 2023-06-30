@@ -5,6 +5,7 @@ from utils import (
     default_style,
     add_hline,
     SEASON_COLORS,
+    COLUMN_NAMES,
 )
 from plotly import express as px
 from plotly.graph_objects import Figure
@@ -19,14 +20,12 @@ def make_plot(
     testing: bool = False,
 ) -> Figure:
     # get data
-    df = get_data(
-        "fnl_sleep__obt", ("sleep_year", "sleep_month", "corrected_hours"), testing
-    ).rename(
-        columns={
-            "corrected_hours": "Duration",
-            "sleep_month": "Month",
-            "sleep_year": "Year",
-        },
+    df = (
+        get_data(
+            "fnl_sleep__obt", ("sleep_year", "sleep_month", "corrected_hours"), testing
+        )
+        .rename(columns=COLUMN_NAMES)
+        .rename(columns={"Real sleep hours": "Duration"})
     )
 
     # get colums to group with

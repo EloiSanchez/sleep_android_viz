@@ -5,6 +5,7 @@ from utils import (
     save_plot,
     add_hline,
     to_hour,
+    COLUMN_NAMES,
 )
 from plotly import express as px
 from plotly.graph_objects import Figure
@@ -23,14 +24,7 @@ def make_plot(
         "fnl_sleep__obt",
         ("sleep_year", "sleep_month", "sleep_from", "hours", "sched"),
         testing,
-    ).rename(
-        columns={
-            "sleep_from": "Bed time",
-            "hours": "Duration",
-            "sleep_month": "Month",
-            "sleep_year": "Year",
-        }
-    )
+    ).rename(columns=COLUMN_NAMES)
 
     # get colums to group with
     if time_granularity == "Month":
@@ -46,13 +40,13 @@ def make_plot(
     df = df.groupby(group_cols).mean().reset_index()
     if label == "Date":
         df[label] = reduce(lambda a, b: df[a] + "-" + df[b], group_cols)
-    df["Sleep Duration"] = df["Duration"]
+    df["Sleep Duration"] = df["Time in bed"]
 
     bed_time = df["Bed time"].mean()
-    wake_up_time = (df["Bed time"] + df["Duration"]).mean()
+    wake_up_time = (df["Bed time"] + df["Time in bed"]).mean()
 
-    # In the plot, duration will become wake up time
-    df = df.rename(columns={"Duration": "Wake up time"})
+    # In the plot, Time in bed will become wake up time
+    df = df.rename(columns={"Time in bed": "Wake up time"})
 
     # make plot
     fig = px.bar(
