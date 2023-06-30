@@ -34,6 +34,7 @@ DASH_STYLE = {
     "line_color": "#5c6571",
     "text_color": "#aaaaaa",
     "clear_background_color": "#3c4251",
+    "active_color": "#353849",
 }
 
 DASH_REF_LINE_STYLE = {

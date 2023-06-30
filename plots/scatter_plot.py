@@ -36,9 +36,10 @@ def make_plot(
     ).rename(columns=COLUMN_NAMES)
 
     for col in set((x, y, color, size)):
-        df = df[df[col] >= 0] if col not in ("Bed time", "Wake up time") else df
+        df = df[df[col] >= 0] if col not in ("Bed time", "Wake up time", None) else df
 
-    df[size] = df[size].where(df[size] >= 1, 1)
+    if size is not None:
+        df[size] = df[size].where(df[size] >= 1, 1)
     df = df[df["Real sleep hours"] > 2]
 
     fig = px.scatter(
@@ -52,6 +53,8 @@ def make_plot(
         marginal_y="violin",
         marginal_x="violin",
         color_continuous_scale=px.colors.sequential.Aggrnyl_r,
+        color_discrete_sequence=["#75c872"],
+        opacity=0.8,
     )
     default_style(fig, dashboard)
 
@@ -59,7 +62,6 @@ def make_plot(
         xaxis_title=x,
         yaxis_title=y,
     )
-    # fig.update_traces(marker_line_color=DASH_STYLE["ref_line_color"])
 
     fig.update_traces(
         marker_color=DASH_STYLE["text_color"],

@@ -1,6 +1,7 @@
 from utils import (
     SEASON_COLORS,
     get_data,
+    get_season,
     default_style,
     save_plot,
     add_hline,
@@ -16,6 +17,7 @@ from functools import reduce
 def make_plot(
     time_granularity: str = "Month",
     time_group: bool = False,
+    color_by="Sleep Duration",
     dashboard: bool = False,
     testing: bool = False,
 ) -> Figure:
@@ -45,6 +47,9 @@ def make_plot(
     bed_time = df["Bed time"].mean()
     wake_up_time = (df["Bed time"] + df["Time in bed"]).mean()
 
+    if color_by == "Season" and time_granularity != "Year":
+        df["Season"] = get_season(df["Month"])
+
     # In the plot, Time in bed will become wake up time
     df = df.rename(columns={"Time in bed": "Wake up time"})
 
@@ -54,7 +59,7 @@ def make_plot(
         x=label,
         y="Wake up time",
         base="Bed time",
-        color="Sleep Duration",
+        color=color_by if time_granularity != "Year" else "Sleep Duration",
         color_discrete_map=SEASON_COLORS,
         color_continuous_scale=px.colors.sequential.Aggrnyl_r,
         labels={"Wake up time": "Sleep schedule", "Date": "Month"},
