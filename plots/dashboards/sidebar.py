@@ -1,5 +1,4 @@
-from dash import html, dcc, callback, Output, Input
-import dash_bootstrap_components as dbc
+from dash import html, dcc
 import sys
 
 # TODO: This is super weird for me. Is there a better solution?

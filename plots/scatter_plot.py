@@ -1,7 +1,6 @@
 from utils import (
     get_data,
     default_style,
-    save_plot,
     COLUMN_NAMES,
     DASH_STYLE,
     DASH_REF_LINE_STYLE,

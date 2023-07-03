@@ -1,4 +1,4 @@
-from dash import Dash, html, dcc, callback, Output, Input
+from dash import Dash, html, callback, Output, Input
 import dash_bootstrap_components as dbc
 from threading import Timer
 import os
