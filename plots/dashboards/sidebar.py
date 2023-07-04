@@ -40,14 +40,14 @@ def content():
             html.Div(
                 [
                     _get_icon(
-                        "bi bi-github",
+                        "fab fa-github",
                         "https://github.com/EloiSanchez/sleep_android_viz",
                     ),
                     _get_icon(
-                        "bi bi-linkedin",
+                        "fab fa-linkedin",
                         "https://www.linkedin.com/in/eloi-sanchez-69094a21b/",
                     ),
-                    _get_icon("bi bi-briefcase", "https://nimbusintelligence.com/"),
+                    _get_icon("fa fa-laptop-code", "https://nimbusintelligence.com/"),
                 ],
                 style={"display": "flex", "justify-content": "space-around"},
             ),
