@@ -7,8 +7,7 @@ import sys
 sys.path.append(".")
 sys.path.append("./plots")
 
-from plots import sleep_schedule, sleep_duration, tag_count, weekly_info, scatter_plot
-from plots.utils import DASH_STYLE
+from plots import sleep_schedule, weekly_info, scatter_plot
 
 
 GRAPH_STYLE = {"height": "35vh", "margin-bottom": "3vh", "max-height": "40vh"}

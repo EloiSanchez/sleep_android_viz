@@ -2,7 +2,6 @@ import pandas as pd
 import sqlite3
 import os
 from plotly.graph_objects import Figure
-import plotly.express as px
 
 from typing import Union, Iterable
 
