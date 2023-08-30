@@ -1,5 +1,7 @@
 # Sleep Android Vizualization
 
+Open [dashboard](http://revolutionarypingu.pythonanywhere.com/)!
+
 ## Summary
 
 This is a learning project on [dbt Core](https://www.getdbt.com/). It was made while working at [Nimbus Intelligence](https://nimbusintelligence.com/) as an Analytics Engineer. The end result can be seen in the following dashboard.
