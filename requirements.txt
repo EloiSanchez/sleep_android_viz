@@ -1,7 +1,7 @@
 dash==2.11.0
 dash-bootstrap-components==1.4.1
-dbt-core==1.4.0
-dbt-sqlite==1.4.0
+dbt-core==1.5.0
+dbt-sqlite==1.5.0
 kaleido==0.2.1
 pandas==2.0.2
 plotly==5.15.0

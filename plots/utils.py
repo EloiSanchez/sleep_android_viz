@@ -75,7 +75,7 @@ def get_data(
 ) -> pd.DataFrame:
     # Get the database directory independent of the path where the script executes
 
-    con = sqlite3.connect(os.path.join(DB_DIR, "final.db"))
+    con = sqlite3.connect(os.path.abspath(os.path.join(DB_DIR, "final.db")))
 
     if columns != "*":
         columns = ", ".join(columns)
